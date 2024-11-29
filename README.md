@@ -1,3 +1,140 @@
+#
+
+
+# **Automated Pavement Condition Rating Using YOLOv8**
+
+## **Project Overview**
+This project leverages cutting-edge computer vision and deep learning techniques to automate the process of Pavement Condition Rating (PCR). By utilizing the YOLOv8 object detection model, the system detects, classifies, and assesses the severity of various road distresses, such as cracks, potholes, and patches, directly from video or image inputs. The results are stored in a MySQL database for further analysis and decision-making.
+
+---
+
+## **Key Features**
+- **Real-Time Detection**: Detects and classifies 10+ types of pavement distresses in images or videos using YOLOv8.
+- **Severity Assessment**: Automatically evaluates the severity of detected distresses (Low, Medium, High) based on confidence thresholds.
+- **Database Integration**: Stores results (class label, confidence score, severity) in a MySQL database for easy querying and analysis.
+- **Scalable Input Options**: Supports both static image files and dynamic video feeds for flexible deployment.
+
+---
+
+## **Technologies Used**
+- **Machine Learning Framework**: [YOLOv8](https://github.com/ultralytics/ultralytics) for real-time object detection.
+- **Programming Language**: Python
+- **Database**: MySQL for structured data storage.
+- **Libraries**: 
+  - `torch` and `ultralytics` for the YOLOv8 model.
+  - `mysql-connector-python` for database interaction.
+
+---
+
+## **Installation**
+Follow the steps below to set up the project locally:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   cd your-repo
+   ```
+
+2. **Install Required Dependencies**:
+   Make sure Python 3.8+ is installed. Then, run:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Set Up MySQL Database**:
+   - Install MySQL and set up a local or remote database.
+   - Create a database (e.g., `shahjee3`) and update the connection details in `index.py`:
+     ```python
+     conn = mysql.connector.connect(
+         host="127.0.0.1",
+         user="root",
+         password="your_password",
+         database="shahjee3"
+     )
+     ```
+
+4. **Run the Application**:
+   - Place your video files in the `Videos/` directory.
+   - Execute the `index.py` script to analyze the video and store results in the database:
+     ```bash
+     python index.py
+     ```
+
+---
+
+## **File Structure**
+- `index.py`: Main script for running the YOLOv8 model and saving results to the MySQL database.
+- `Videos/`: Directory to store video files for analysis.
+- `requirements.txt`: Lists all Python dependencies required for the project.
+
+---
+
+## **How It Works**
+1. **Object Detection**:
+   - The YOLOv8 model processes the video file to detect and classify road distresses.
+   - Results include class labels and confidence scores.
+
+2. **Severity Classification**:
+   - Severity levels are determined based on the following thresholds:
+     - **High Severity**: Confidence > 0.75
+     - **Medium Severity**: 0.50 < Confidence ≤ 0.75
+     - **Low Severity**: Confidence ≤ 0.50
+
+3. **Database Storage**:
+   - Each detection is stored in the `YOLOv8_Output` table with the following fields:
+     - `id`: Auto-incremented primary key.
+     - `image_name`: Frame or sequence index from the video.
+     - `class_label`: Detected class label (e.g., cracks, potholes).
+     - `confidence`: Model confidence score.
+     - `severity_level`: Assigned severity level.
+
+---
+
+## **Example Output**
+Sample database entry for a detected road distress:
+| **ID** | **Image Name** | **Class Label** | **Confidence** | **Severity Level** |
+|--------|----------------|-----------------|----------------|--------------------|
+| 1      | Frame_001      | D3 (Pothole)    | 0.87           | High              |
+
+---
+
+## **Future Improvements**
+- Integrating **LiDAR Sensors** for 3D surface analysis.
+- Adding **Drone-Based Data Collection** to increase coverage and reduce environmental impact.
+- Implementing **Geo-Tagging** for precise distress location mapping.
+- Developing a **Web Dashboard** for real-time data visualization and reporting.
+
+---
+
+## **Contributors**
+- **Hasnain Mehdi Raza** (Group Leader)
+- **Syed Irtaza Imam**
+- **Arsalan**
+- **Salman Memon**
+
+### **Supervisor**: Dr. Arshad Hussain, NICE, NUST
+
+---
+
+## **License**
+This project is currently not licensed. For inquiries or permissions, please contact raza.mehdi.hasnain@gmail.com.
+
+--- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div align="center">
   <p>
     <a href="https://github.com/ultralytics/assets/releases/tag/v8.2.0" target="_blank">
